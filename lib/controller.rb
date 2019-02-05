@@ -1,4 +1,5 @@
 require_relative 'view'
+require_relative 'scrape_service'
 
 class Controller
   def initialize(cookbook)
@@ -11,32 +12,47 @@ class Controller
   end
 
   def create
-    # Ask the view for a name
     name = @view.ask_for_string('name')
-    # Ask the view for a description
     description = @view.ask_for_string('description')
-    # Initialize a recipe
-    recipe = Recipe.new(name, description)
-    # Ask the repository (cookbook) to store the recipe
+    prep_time = @view.ask_for_string('preparation time')
+    recipe = Recipe.new(name: name, description: description, prep_time: prep_time)
     @cookbook.add_recipe(recipe)
   end
 
   def destroy
-    # Get the recipes array from the repo
-    # Ask the view display the list]
     display_recipes
-    # Ask the view for the index of the recipe
     index = @view.ask_for_index
-    # Ask the repo (cookbook) to delete the recipe
     @cookbook.remove_recipe(index)
+  end
+
+  def import
+    # Ask the user for a query
+    # Get the query
+    query = @view.ask_for_string("ingredient you're looking for")
+    # Ask ScrapeService for the array of recipes
+    recipes = ScrapeService.new(query).call
+    # Display the array
+    @view.display(recipes)
+    # Ask the user for one to add to the cookbook
+    index = @view.ask_for_index
+    # Add the recipe to the cook
+    recipe = recipes[index]
+    @cookbook.add_recipe(recipe)
+  end
+
+  def mark_recipe_as_done
+    # Display the list
+    display_recipes
+    # Ask for the index to mark
+    index = @view.ask_for_index
+    # get the cookbook to mark the recipe
+    @cookbook.mark_as_done(index)
   end
 
   private
 
   def display_recipes
-    # Get the recipes array from the repo
     recipes = @cookbook.all
-    # Ask the view to display them
     @view.display(recipes)
   end
 end

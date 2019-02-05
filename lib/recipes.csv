@@ -1,6 +1,9 @@
-Crumpets,Crumpets description
-Beans & Bacon breakfast,Beans description
-Plum pudding,Pudding description
-Apple pie,Apple pie description
-Christmas crumble,Crumble description
-Feijoada,Feijão e água
+name,description,prep_time,done
+Crumpets,Crumpets description,10min,false
+Beans & Bacon breakfast,Beans description,10min,true
+Plum pudding,Pudding description,10min,true
+Apple pie,Apple pie description,10min,true
+Christmas crumble,Crumble description,10min,true
+Ice,Water,1min,false
+Wine,"Grapes and Water, and Magic",10years,true
+Waffles with beer,"Ingredients : sugar, flour, milk, egg, butter, salt. Mix flour, yeast, sugar and egg yolks then add beer and milk. Add melted butter then beat egg whites until stiff and add them to the mixture. Leave to rest for 2-3 hours or more. Pour the...",15 min,true
